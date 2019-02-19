@@ -26,6 +26,10 @@ DerivedData
 mailcore2/unittest/data
 *.orig
 
+# CocoaPods
+Pods/
+Podfile.lock
+
 # Compiled Python scripts
 *.pyc
 
