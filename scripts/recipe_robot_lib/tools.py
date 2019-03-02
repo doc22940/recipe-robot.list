@@ -35,6 +35,7 @@ from functools import wraps
 from random import choice as random_choice
 from subprocess import PIPE, Popen
 from urllib import quote_plus
+import textwrap
 
 # pylint: disable=no-name-in-module
 from Foundation import NSUserDefaults
@@ -166,7 +167,14 @@ def robo_print(message, log_level=LogLevel.LOG, indent=0):
             and (OutputMode.verbose_mode or OutputMode.debug_mode)
         )
     ):
-        print_func(line)
+        for wrapped_line in textwrap.wrap(
+            line,
+            width=100,  # TODO: Is this optimal? Consider default Terminal.app and iTerm.app settings.
+            break_long_words=False,
+            break_on_hyphens=False,
+            subsequent_indent="    ",
+        ):
+            print_func(wrapped_line)
 
 
 def strip_dev_suffix(dev):
